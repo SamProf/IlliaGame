@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CustomGameDefinition, CustomGameOperation} from '../../models/custom-game-definition';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  custom : CustomGameDefinition = new CustomGameDefinition();
+
+  CustomGameOperation = CustomGameOperation;
 
   ngOnInit(): void {
   }
 
+  customStart() {
+    this.router.navigate(["game", "custom"], {
+      queryParams: this.custom
+    })
+  }
 }

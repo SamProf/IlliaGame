@@ -15,3 +15,55 @@
     <a routerLink="/game/div_11_20">Деление 11-20</a>
   </li>
 </ul>
+
+
+<h3>Custom</h3>
+
+<div style="display: flex; flex-direction: column;">
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Operation</mat-label>
+    <mat-select [(value)]="custom.op">
+      <mat-option [value]="CustomGameOperation.Mult">
+        {{CustomGameOperation.Mult}}
+      </mat-option>
+      <mat-option [value]="CustomGameOperation.Div">
+        {{CustomGameOperation.Div}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>A From</mat-label>
+    <input matInput [(ngModel)]="custom.aFrom">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>A To</mat-label>
+    <input matInput [(ngModel)]="custom.aTo">
+  </mat-form-field>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>B From</mat-label>
+    <input matInput [(ngModel)]="custom.bFrom">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>B To</mat-label>
+    <input matInput [(ngModel)]="custom.bTo">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Factor</mat-label>
+    <input matInput [(ngModel)]="custom.factor">
+  </mat-form-field>
+
+
+  <button mat-button color="primary" (click)="customStart()">Start</button>
+
+
+
+</div>

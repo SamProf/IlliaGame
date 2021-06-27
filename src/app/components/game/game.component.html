@@ -1,37 +1,41 @@
-<div class="scoreboard">
-  <div style="color: blue">Осталось {{game.items.length}} </div>
-  <div style="color: green">Верно {{game.answers}} </div>
-  <div style="color:red;">НЕ Верно {{game.mistakes}} </div>
-</div>
-
-
-<form (ngSubmit)="okClick()" *ngIf="game.current" class="form">
-
-  <span>{{game.current.item.text}}</span>
-  <span> = </span>
-  <input type="text" [(ngModel)]="game.current.answer" [ngModelOptions]="{standalone: true}">
-
-
-  <button type="submit">Отправить</button>
-</form>
-<ng-container *ngIf="!game.current">
-  <h2 class="form">
-
-    Конец! Ура!
-  </h2>
-
-  <img [attr.src]="endGif"/>
-
-
-
-  <div *ngFor="let log of game.log" [class.log-item-mistake]="log.answer != log.item.answer">
-    {{log.item.text}} = {{log.answer}}
-    <span *ngIf="log.answer != log.item.answer">( {{log.answer}} )</span>
+<ng-container *ngIf="game">
+  <div class="scoreboard">
+    <div style="color: blue">Осталось {{game.items.length}} </div>
+    <div style="color: green">Верно {{game.answers}} </div>
+    <div style="color:red;">НЕ Верно {{game.mistakes}} </div>
+    <div style="">Время {{dateDiff(date, game.dateFrom)}} </div>
   </div>
 
 
-</ng-container>
+  <form (ngSubmit)="okClick()" *ngIf="game.current" class="form">
 
-<div class="overlay" [class.visible]="overlayVisible" [class.answer]="overlayAnswer" [class.mistake]="!overlayAnswer">
-  {{overlay}}
-</div>
+    <span>{{game.current.item.text}}</span>
+    <span> = </span>
+    <input type="text" [(ngModel)]="game.current.answer" [ngModelOptions]="{standalone: true}">
+
+
+    <button type="submit">Отправить</button>
+    <span>{{dateDiff(date, game.current.dateFrom)}}</span>
+  </form>
+  <ng-container *ngIf="!game.current">
+    <h2 class="form">
+
+      Конец! Ура!   ({{dateDiff(game.dateTo, game.dateFrom)}})
+    </h2>
+
+    <img [attr.src]="endGif"/>
+
+
+    <div *ngFor="let log of game.log" [class.log-item-mistake]="log.answer != log.item.answer">
+      {{log.item.text}} = {{log.answer}}
+      <span *ngIf="log.answer != log.item.answer">( {{log.item.answer}} )</span>
+      <span> {{dateDiff(log.dateTo, log.dateFrom)}} </span>
+    </div>
+
+
+  </ng-container>
+
+  <div class="overlay" [class.visible]="overlayVisible" [class.answer]="overlayAnswer" [class.mistake]="!overlayAnswer">
+    {{overlay}}
+  </div>
+</ng-container>
